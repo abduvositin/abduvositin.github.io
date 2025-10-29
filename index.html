@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oddiy HTML sahifa</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+    header { background:#f0f0f0; padding:20px; border-radius:8px; }
+    nav a { margin-right:12px; text-decoration:none; color:#333; }
+    .card { padding:16px; border:1px solid #ddd; border-radius:8px; margin-top:20px; }
+    button { padding:8px 12px; border-radius:6px; cursor:pointer; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Salom! Bu oddiy HTML sahifa</h1>
+    <nav>
+      <a href="#about">Haqida</a>
+      <a href="#contact">Bog'lanish</a>
+    </nav>
+  </header>
+
+  <section id="about" class="card">
+    <h2>Haqida</h2>
+    <p>Bu yerda siz sahifa haqida qisqacha ma'lumot yozishingiz mumkin. HTML, CSS va JavaScript bilan oddiy interaktivlik qo'shamiz.</p>
+    <img src="https://via.placeholder.com/400x200" alt="Namuna rasm" style="max-width:100%; border-radius:6px;">
+  </section>
+
+  <section id="contact" class="card">
+    <h2>Bog'lanish</h2>
+    <form onsubmit="event.preventDefault(); alert('Form yuborildi!');">
+      <label>
+        Ismingiz:<br>
+        <input type="text" name="name" required placeholder="Ismingizni kiriting">
+      </label>
+      <br><br>
+      <label>
+        Email:<br>
+        <input type="email" name="email" required placeholder="email@misol.com">
+      </label>
+      <br><br>
+      <button type="submit">Yuborish</button>
+    </form>
+  </section>
+
+  <footer style="margin-top:24px; color:#666;">
+    © 2025 — Sizning ismingiz
+  </footer>
+
+  <script>
+    // Oddiy JavaScript: sahifa yuklanganda konsolga xabar chiqadi
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Sahifa tayyor!');
+    });
+  </script>
+
+</body>
+</html>
