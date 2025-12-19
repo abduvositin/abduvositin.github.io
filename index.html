@@ -1,60 +1,309 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Oddiy HTML sahifa</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
-    header { background:#f0f0f0; padding:20px; border-radius:8px; }
-    nav a { margin-right:12px; text-decoration:none; color:#333; }
-    .card { padding:16px; border:1px solid #ddd; border-radius:8px; margin-top:20px; }
-    button { padding:8px 12px; border-radius:6px; cursor:pointer; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abduvosit Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'JetBrains Mono', monospace;
+  color:#e5fef5;
+  background:#000;
+  overflow-x:hidden;
+}
+
+/* HACKER BACKGROUND */
+.hacker-bg{
+  position:fixed; inset:0; z-index:-1;
+  background:radial-gradient(circle at top,#020617,#000);
+}
+.code-layer{
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(0,255,150,.08) 0 1px,transparent 1px 3px),
+    repeating-linear-gradient(90deg,rgba(0,255,150,.05) 0 1px,transparent 1px 4px);
+  animation:move 25s linear infinite;
+}
+@keyframes move{to{background-position:0 600px}}
+.scanline{
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,transparent,rgba(0,255,150,.15),transparent);
+  animation:scan 6s linear infinite;
+}
+@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
+
+/* NAV */
+nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 10%;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(10px);
+  position:sticky;top:0;
+}
+nav a{color:#7fffe0;text-decoration:none;margin-left:20px}
+.logo{color:#00ff99;font-weight:700}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:0 10%;
+}
+.hero h1{font-size:56px;text-shadow:0 0 20px rgba(0,255,150,.6)}
+.hero span{color:#00ff99}
+.hero p{margin:15px 0;color:#9fffe8}
+code{
+  background:rgba(0,0,0,.6);
+  border:1px solid rgba(0,255,150,.4);
+  padding:8px 16px;
+  box-shadow:0 0 15px rgba(0,255,150,.4);
+}
+
+/* BUTTON */
+.buttons a{
+  display:inline-block;margin:15px;padding:12px 30px;
+  border-radius:30px;border:1px solid #00ff99;
+  color:#00ff99;text-decoration:none;transition:.3s;
+}
+.buttons a:hover{background:#00ff99;color:#000;box-shadow:0 0 20px #00ff99}
+
+/* STATS */
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:25px;padding:80px 10%;
+}
+.stat{
+  border:1px solid rgba(0,255,150,.4);
+  padding:30px;border-radius:18px;
+  text-align:center;backdrop-filter:blur(8px);
+}
+.stat h2{font-size:40px;color:#00ff99}
+
+/* SECTIONS */
+section{padding:80px 10%}
+h2{font-size:36px;margin-bottom:40px;color:#00ff99}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+
+/* SKILLS */
+.skill{margin-bottom:20px}
+.bar{
+  height:14px;border:1px solid rgba(0,255,150,.4);
+  border-radius:20px;overflow:hidden;
+}
+.bar span{
+  display:block;height:100%;
+  background:linear-gradient(90deg,#00ff99,#00ffaa);
+  box-shadow:0 0 15px #00ff99;
+}
+
+/* PROJECTS */
+/* ===== PROJECT CARD (NEO STYLE) ===== */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
+}
+
+.project{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(0,255,150,.35);
+  border-radius:22px;
+  padding:26px;
+  backdrop-filter:blur(12px);
+  transition:.3s;
+  position:relative;
+}
+
+.project:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 40px rgba(0,255,150,.25);
+}
+
+.project-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.project-title{
+  font-size:20px;
+  font-weight:600;
+  color:#eafff7;
+}
+
+.project-badge{
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:20px;
+  background:rgba(0,255,150,.15);
+  color:#00ff99;
+}
+
+.project-tech{
+  font-size:13px;
+  color:#9fffe8;
+  margin-bottom:14px;
+}
+
+.project-desc{
+  font-size:14px;
+  line-height:1.6;
+  color:#c9fff0;
+  margin-bottom:20px;
+}
+
+.project-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:#00ff99;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.project-link:hover{
+  text-decoration:underline;
+}
+
+
+/* CONTACT */
+form{max-width:500px}
+input,textarea{
+  width:100%;margin-bottom:15px;padding:12px;
+  background:#000;color:#00ff99;
+  border:1px solid rgba(0,255,150,.4);
+  border-radius:10px;
+}
+button{
+  padding:12px 30px;background:transparent;
+  border:1px solid #00ff99;color:#00ff99;
+  border-radius:30px;
+}
+button:hover{background:#00ff99;color:#000}
+
+/* FOOTER */
+footer{text-align:center;padding:40px;color:#7fffe0}
+
+@media(max-width:900px){
+  .about{grid-template-columns:1fr}
+  .hero h1{font-size:42px}
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Salom! Bu oddiy HTML sahifa</h1>
-    <nav>
-      <a href="#about">Haqida</a>
-      <a href="#contact">Bog'lanish</a>
-    </nav>
-  </header>
+<div class="hacker-bg">
+  <div class="code-layer"></div>
+  <div class="scanline"></div>
+</div>
 
-  <section id="about" class="card">
-    <h2>Haqida</h2>
-    <p>Bu yerda siz sahifa haqida qisqacha ma'lumot yozishingiz mumkin. HTML, CSS va JavaScript bilan oddiy interaktivlik qo'shamiz.</p>
-    <img src="https://via.placeholder.com/400x200" alt="Namuna rasm" style="max-width:100%; border-radius:6px;">
-  </section>
+<nav>
+  <div class="logo">Abduvosit.dev</div>
+  <div>
+    <a href="#about">Men haqimda</a>
+    <a href="#skills">Ko‘nikmalar</a>
+    <a href="#projects">Loyihalar</a>
+  </div>
+</nav>
 
-  <section id="contact" class="card">
-    <h2>Bog'lanish</h2>
-    <form onsubmit="event.preventDefault(); alert('Form yuborildi!');">
-      <label>
-        Ismingiz:<br>
-        <input type="text" name="name" required placeholder="Ismingizni kiriting">
-      </label>
-      <br><br>
-      <label>
-        Email:<br>
-        <input type="email" name="email" required placeholder="email@misol.com">
-      </label>
-      <br><br>
-      <button type="submit">Yuborish</button>
-    </form>
-  </section>
+<div class="hero">
+  <h1>Salom, men <span>Abduvosit</span></h1>
+  <p> Android Dasturchi</p>
+  <code>&gt; ∞_</code>
+<div class="buttons">
+  <a href="#projects">Loyihalarim</a>
 
-  <footer style="margin-top:24px; color:#666;">
-    © 2025 — Sizning ismingiz
-  </footer>
+  <a href="https://github.com/abduvositin" target="_blank" class="github-btn">
+    GitHub
+  </a>
+</div>
+</div>
 
-  <script>
-    // Oddiy JavaScript: sahifa yuklanganda konsolga xabar chiqadi
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('Sahifa tayyor!');
-    });
-  </script>
+<div class="stats">
+  <div class="stat"><h2>∞+</h2><p>Loyihalar</p></div>
+  <div class="stat"><h2>∞+</h2><p>Texnologiyalar</p></div>
+  <div class="stat"><h2>∞</h2><p>Yil tajriba</p></div>
+</div>
+
+<section id="about">
+<h2>Kim men?</h2>
+<div class="about">
+<p>
+  Men Abduvosit, 19 yoshli Android va Telegram bot dasturchiman.
+  Kotlin asosida Android ilovalar, PHP yordamida esa funksional va tezkor botlar yarataman.
+</p></div>
+</section>
+
+<section id="skills">
+<h2>Ko‘nikmalar</h2>
+<div class="skill">Kotlin<div class="bar"><span style="width:75%"></span></div></div>
+<div class="skill">PHP<div class="bar"><span style="width:85%"></span></div></div>
+<div class="skill">Python<div class="bar"><span style="width:35%"></span></div></div>
+<div class="skill">MySQL<div class="bar"><span style="width:80%"></span></div></div>
+<div class="skill">Firebase<div class="bar"><span style="width:75%"></span></div></div>
+</section>
+
+<section id="projects">
+<h2>Loyihalar</h2>
+
+<div class="projects">
+
+  <div class="project">
+    <div class="project-header">
+      <div class="project-title">Film Ichida</div>
+      <div class="project-badge">PHP · MySQL</div>
+    </div>
+    
+    <div class="project-tech">
+      Telegram Bot · Kino bot
+    </div>
+    <div class="project-desc">
+      O'zbek tilidagi kinolarni sifatli formatda tomosha qilishing mumkin bolgan Telegram bot
+    </div>
+    <a href="#" class="project-link">Loyihani ochish →</a>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <div class="project-title">Yuklovchi Bot</div>
+      <div class="project-badge">PHP · MySQL · Api</div>
+    </div>
+    <div class="project-tech">
+     Telegram Bot · Save reels
+    </div>
+    <div class="project-desc">
+      Instagram Youtube Facebook platformalaridan vidolarni osongina yuklab olish mumkin.
+    </div>
+    <a href="#" class="project-link">Loyihani ochish →</a>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <div class="project-title">Uni Signal</div>
+      <div class="project-badge">Kotlin · PHP · PYTHON</div>
+    </div>
+    <div class="project-tech">
+      Bildirishnomalar · Yangiliklar
+    </div>
+    <div class="project-desc">
+      Tez kunda...
+    </div>
+    <a href="#" class="project-link">Loyihani ochish →</a>
+  </div>
+
+</div>
+</section>
+
 
 </body>
 </html>
