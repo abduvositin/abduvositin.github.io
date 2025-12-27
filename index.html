@@ -41,12 +41,28 @@ body{
 nav{
   display:flex;justify-content:space-between;align-items:center;
   padding:20px 10%;
-  background:rgba(0,0,0,.4);
+  background:rgba(0,0,0,.8);
   backdrop-filter:blur(10px);
-  position:sticky;top:0;
+  position:sticky;top:0;z-index: 1000;
+  border-bottom: 1px solid rgba(0, 255, 150, 0.1);
 }
-nav a{color:#7fffe0;text-decoration:none;margin-left:20px}
-.logo{color:#00ff99;font-weight:700}
+nav a{color:#7fffe0;text-decoration:none;margin-left:20px; transition: 0.3s;}
+nav a:hover{color: #00ff99;}
+.logo{color:#00ff99;font-weight:700; font-size: 20px;}
+
+/* BURGER MENU ICON */
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.menu-icon span {
+  width: 25px;
+  height: 2px;
+  background-color: #00ff99;
+  transition: 0.3s;
+}
 
 /* HERO */
 .hero{
@@ -105,7 +121,6 @@ h2{font-size:36px;margin-bottom:40px;color:#00ff99}
 }
 
 /* PROJECTS */
-/* ===== PROJECT CARD (NEO STYLE) ===== */
 .projects{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -119,7 +134,9 @@ h2{font-size:36px;margin-bottom:40px;color:#00ff99}
   padding:26px;
   backdrop-filter:blur(12px);
   transition:.3s;
-  position:relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .project:hover{
@@ -130,7 +147,7 @@ h2{font-size:36px;margin-bottom:40px;color:#00ff99}
 .project-header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-start;
   margin-bottom:14px;
 }
 
@@ -141,11 +158,12 @@ h2{font-size:36px;margin-bottom:40px;color:#00ff99}
 }
 
 .project-badge{
-  font-size:12px;
-  padding:4px 10px;
+  font-size:10px;
+  padding:4px 8px;
   border-radius:20px;
   background:rgba(0,255,150,.15);
   color:#00ff99;
+  white-space: nowrap;
 }
 
 .project-tech{
@@ -168,116 +186,62 @@ h2{font-size:36px;margin-bottom:40px;color:#00ff99}
   color:#00ff99;
   text-decoration:none;
   font-size:14px;
+  font-weight: bold;
 }
 
-.project-link:hover{
-  text-decoration:underline;
-}
-
-
-/* CONTACT */
-form{max-width:500px}
-input,textarea{
-  width:100%;margin-bottom:15px;padding:12px;
-  background:#000;color:#00ff99;
-  border:1px solid rgba(0,255,150,.4);
-  border-radius:10px;
-}
-button{
-  padding:12px 30px;background:transparent;
-  border:1px solid #00ff99;color:#00ff99;
-  border-radius:30px;
-}
-button:hover{background:#00ff99;color:#000}
-
-/* FOOTER */
-footer{text-align:center;padding:40px;color:#7fffe0}
-
-@media(max-width:900px){
-  .about{grid-template-columns:1fr}
-  .hero h1{font-size:42px}
-}
-
-  /* ===== MOBILE OPTIMIZATION ===== */
-@media (max-width: 600px) {
-
-  nav {
-    padding: 14px 6%;
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+  nav { padding: 15px 5%; }
+  
+  .menu-icon { display: flex; }
+  
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: rgba(0,0,0,0.95);
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+    display: flex;
+  }
+
+  .nav-links.active { right: 0; }
+
+  .nav-links a {
+    margin: 20px 0;
+    font-size: 20px;
+  }
+
+  .hero h1 { font-size: 36px; }
+  
+  /* Loyihalarni 1 qatorda 2ta qilish */
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
-  nav a {
-    margin: 0 10px;
-    font-size: 14px;
-  }
-
-  .hero {
-    padding: 0 6%;
-  }
-
-  .hero h1 {
-    font-size: 32px;
-    line-height: 1.3;
-  }
-
-  .hero p {
-    font-size: 14px;
-  }
-
-  code {
-    font-size: 14px;
-    padding: 6px 12px;
-  }
-
-  .buttons a {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    text-align: center;
-  }
-
-  .stats {
-    padding: 50px 6%;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  section {
-    padding: 60px 6%;
-  }
-
-  h2 {
-    font-size: 26px;
-    text-align: center;
-  }
-
-  .about {
-    grid-template-columns: 1fr;
-    text-align: center;
-    font-size: 14px;
-  }
-
-  .skill {
-    font-size: 14px;
-  }
-
-  .projects {
-    grid-template-columns: 1fr;
-  }
-
   .project {
-    padding: 20px;
+    padding: 15px;
   }
 
-  .project-title {
-    font-size: 18px;
-  }
+  .project-title { font-size: 14px; }
+  .project-badge { display: none; } /* Joy tejash uchun */
+  .project-desc { font-size: 11px; margin-bottom: 10px; }
+  .project-tech { font-size: 10px; }
+  .project-link { font-size: 11px; }
 
-  .project-desc {
-    font-size: 13px;
-  }
+  .stats { grid-template-columns: repeat(2, 1fr); }
 }
+
+@media (max-width: 480px) {
+  /* Juda kichik ekranlar uchun shriftlarni moslash */
+  .hero h1 { font-size: 28px; }
+}
+
 </style>
 </head>
 
@@ -290,7 +254,14 @@ footer{text-align:center;padding:40px;color:#7fffe0}
 
 <nav>
   <div class="logo">Abduvosit.dev</div>
-  <div>
+  
+  <div class="menu-icon" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="nav-links" id="navLinks">
     <a href="#about">Men haqimda</a>
     <a href="#skills">Ko‘nikmalar</a>
     <a href="#projects">Loyihalar</a>
@@ -303,17 +274,14 @@ footer{text-align:center;padding:40px;color:#7fffe0}
   <code>&gt; ∞_</code>
 <div class="buttons">
   <a href="#projects">Loyihalarim</a>
-
-  <a href="https://github.com/abduvositin" target="_blank" class="github-btn">
-    GitHub
-  </a>
+  <a href="https://github.com/abduvositin" target="_blank">GitHub</a>
 </div>
 </div>
 
 <div class="stats">
   <div class="stat"><h2>∞+</h2><p>Loyihalar</p></div>
   <div class="stat"><h2>∞+</h2><p>Texnologiyalar</p></div>
-  <div class="stat"><h2>∞</h2><p>Yil tajriba</p></div>
+  <div class="stat"><h2>1+</h2><p>Yil tajriba</p></div>
 </div>
 
 <section id="about">
@@ -342,49 +310,53 @@ footer{text-align:center;padding:40px;color:#7fffe0}
   <div class="project">
     <div class="project-header">
       <div class="project-title">Film Ichida</div>
-      <div class="project-badge">PHP · MySQL</div>
+      <div class="project-badge">PHP</div>
     </div>
-    
-    <div class="project-tech">
-      Telegram Bot · Kino bot
-    </div>
-    <div class="project-desc">
-      O'zbek tilidagi kinolarni sifatli formatda tomosha qilishing mumkin bolgan Telegram bot
-    </div>
-    <a href="#" class="project-link">Loyihani ochish →</a>
+    <div class="project-tech">Telegram Bot</div>
+    <div class="project-desc">Kinolarni sifatli formatda tomosha qilish bot.</div>
+    <a href="https://t.me/FilmIchidaBot" target="_blank" class="project-link">Ochish →</a>
   </div>
 
   <div class="project">
     <div class="project-header">
-      <div class="project-title">Flux Save Bot</div>
-      <div class="project-badge">PHP · MySQL · Api</div>
+      <div class="project-title">Flux Save</div>
+      <div class="project-badge">API</div>
     </div>
-    <div class="project-tech">
-     Telegram Bot · Save reels
-    </div>
-    <div class="project-desc">
-      Instagram Youtube Facebook platformalaridan vidolarni osongina yuklab olish mumkin.
-    </div>
-    <a href="#" class="project-link">Loyihani ochish →</a>
+    <div class="project-tech">Video Downloader</div>
+    <div class="project-desc">Insta, FB, YT videolarini yuklovchi bot.</div>
+    <a href="https://t.me/FluxSaveBot" target="_blank" class="project-link">Ochish →</a>
   </div>
 
   <div class="project">
     <div class="project-header">
       <div class="project-title">Uni Signal</div>
-      <div class="project-badge">Kotlin · PHP · PYTHON</div>
+      <div class="project-badge">Kotlin</div>
     </div>
-    <div class="project-tech">
-      Bildirishnomalar · Yangiliklar
-    </div>
-    <div class="project-desc">
-      Tez kunda...
-    </div>
-    <a href="#" class="project-link">Loyihani ochish →</a>
+    <div class="project-tech">App & News</div>
+    <div class="project-desc">Tezkor bildirishnomalar va yangiliklar ilovasi.</div>
+    <a href="https://github.com/abduvositin/UniGift-Signals/" target="_blank" class="project-link">Ochish →</a>
   </div>
 
 </div>
 </section>
 
+<script>
+  // Burger menyu ishlashi uchun
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  const links = document.querySelectorAll('.nav-links a');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Link bosilganda menyu yopilishi
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+</script>
 
 </body>
 </html>
