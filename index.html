@@ -1,362 +1,357 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abduvosit Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abduvosit Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
 
-body{
-  font-family:'JetBrains Mono', monospace;
-  color:#e5fef5;
-  background:#000;
-  overflow-x:hidden;
-}
+        body{
+            font-family:'JetBrains Mono', monospace;
+            color:#e5fef5;
+            background:#000;
+            overflow-x:hidden;
+        }
 
-/* HACKER BACKGROUND */
-.hacker-bg{
-  position:fixed; inset:0; z-index:-1;
-  background:radial-gradient(circle at top,#020617,#000);
-}
-.code-layer{
-  position:absolute; inset:0;
-  background-image:
-    repeating-linear-gradient(0deg,rgba(0,255,150,.08) 0 1px,transparent 1px 3px),
-    repeating-linear-gradient(90deg,rgba(0,255,150,.05) 0 1px,transparent 1px 4px);
-  animation:move 25s linear infinite;
-}
-@keyframes move{to{background-position:0 600px}}
-.scanline{
-  position:absolute; inset:0;
-  background:linear-gradient(to bottom,transparent,rgba(0,255,150,.15),transparent);
-  animation:scan 6s linear infinite;
-}
-@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
+        /* HACKER BACKGROUND */
+        .hacker-bg{
+            position:fixed; inset:0; z-index:-1;
+            background:radial-gradient(circle at top,#020617,#000);
+        }
+        .code-layer{
+            position:absolute; inset:0;
+            background-image:
+                repeating-linear-gradient(0deg,rgba(0,255,150,.08) 0 1px,transparent 1px 3px),
+                repeating-linear-gradient(90deg,rgba(0,255,150,.05) 0 1px,transparent 1px 4px);
+            animation:move 25s linear infinite;
+        }
+        @keyframes move{to{background-position:0 600px}}
+        .scanline{
+            position:absolute; inset:0;
+            background:linear-gradient(to bottom,transparent,rgba(0,255,150,.15),transparent);
+            animation:scan 6s linear infinite;
+        }
+        @keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
 
-/* NAV */
-nav{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:20px 10%;
-  background:rgba(0,0,0,.8);
-  backdrop-filter:blur(10px);
-  position:sticky;top:0;z-index: 1000;
-  border-bottom: 1px solid rgba(0, 255, 150, 0.1);
-}
-nav a{color:#7fffe0;text-decoration:none;margin-left:20px; transition: 0.3s;}
-nav a:hover{color: #00ff99;}
-.logo{color:#00ff99;font-weight:700; font-size: 20px;}
+        /* NAV */
+        nav{
+            display:flex;justify-content:space-between;align-items:center;
+            padding:20px 10%;
+            background:rgba(0,0,0,.8);
+            backdrop-filter:blur(10px);
+            position:sticky;top:0;z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 150, 0.1);
+        }
+        nav a{color:#7fffe0;text-decoration:none;margin-left:20px; transition: 0.3s;}
+        nav a:hover{color: #00ff99;}
+        .logo{color:#00ff99;font-weight:700; font-size: 20px;}
 
-/* BURGER MENU ICON */
-.menu-icon {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
-.menu-icon span {
-  width: 25px;
-  height: 2px;
-  background-color: #00ff99;
-  transition: 0.3s;
-}
+        /* BURGER MENU ICON */
+        .menu-icon {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-icon span {
+            width: 25px;
+            height: 2px;
+            background-color: #00ff99;
+            transition: 0.3s;
+        }
 
-/* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  text-align:center;padding:0 10%;
-}
-.hero h1{font-size:56px;text-shadow:0 0 20px rgba(0,255,150,.6)}
-.hero span{color:#00ff99}
-.hero p{margin:15px 0;color:#9fffe8}
-code{
-  background:rgba(0,0,0,.6);
-  border:1px solid rgba(0,255,150,.4);
-  padding:8px 16px;
-  box-shadow:0 0 15px rgba(0,255,150,.4);
-}
+        /* HERO */
+        .hero{
+            min-height:100vh;
+            display:flex;flex-direction:column;
+            justify-content:center;align-items:center;
+            text-align:center;padding:0 10%;
+        }
+        .hero h1{font-size:56px;text-shadow:0 0 20px rgba(0,255,150,.6)}
+        .hero span{color:#00ff99}
+        .hero p{margin:15px 0;color:#9fffe8}
+        code{
+            background:rgba(0,0,0,.6);
+            border:1px solid rgba(0,255,150,.4);
+            padding:8px 16px;
+            box-shadow:0 0 15px rgba(0,255,150,.4);
+        }
 
-/* BUTTON */
-.buttons a{
-  display:inline-block;margin:15px;padding:12px 30px;
-  border-radius:30px;border:1px solid #00ff99;
-  color:#00ff99;text-decoration:none;transition:.3s;
-}
-.buttons a:hover{background:#00ff99;color:#000;box-shadow:0 0 20px #00ff99}
+        /* BUTTON */
+        .buttons a{
+            display:inline-block;margin:15px;padding:12px 30px;
+            border-radius:30px;border:1px solid #00ff99;
+            color:#00ff99;text-decoration:none;transition:.3s;
+        }
+        .buttons a:hover{background:#00ff99;color:#000;box-shadow:0 0 20px #00ff99}
 
-/* STATS */
-.stats{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:25px;padding:80px 10%;
-}
-.stat{
-  border:1px solid rgba(0,255,150,.4);
-  padding:30px;border-radius:18px;
-  text-align:center;backdrop-filter:blur(8px);
-}
-.stat h2{font-size:40px;color:#00ff99}
+        /* STATS */
+        .stats{
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+            gap:25px;padding:80px 10%;
+        }
+        .stat{
+            border:1px solid rgba(0,255,150,.4);
+            padding:30px;border-radius:18px;
+            text-align:center;backdrop-filter:blur(8px);
+        }
+        .stat h2{font-size:40px;color:#00ff99}
 
-/* SECTIONS */
-section{padding:80px 10%}
-h2{font-size:36px;margin-bottom:40px;color:#00ff99}
+        /* SECTIONS */
+        section{padding:80px 10%}
+        h2{font-size:36px;margin-bottom:40px;color:#00ff99}
 
-/* ABOUT */
-.about{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+        /* ABOUT */
+        .about{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 
-/* SKILLS */
-.skill{margin-bottom:20px}
-.bar{
-  height:14px;border:1px solid rgba(0,255,150,.4);
-  border-radius:20px;overflow:hidden;
-}
-.bar span{
-  display:block;height:100%;
-  background:linear-gradient(90deg,#00ff99,#00ffaa);
-  box-shadow:0 0 15px #00ff99;
-}
+        /* SKILLS */
+        .skill{margin-bottom:20px}
+        .bar{
+            height:14px;border:1px solid rgba(0,255,150,.4);
+            border-radius:20px;overflow:hidden;
+        }
+        .bar span{
+            display:block;height:100%;
+            background:linear-gradient(90deg,#00ff99,#00ffaa);
+            box-shadow:0 0 15px #00ff99;
+        }
 
-/* PROJECTS */
-.projects{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:30px;
-}
+        /* PROJECTS */
+        .projects{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:30px;
+        }
 
-.project{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(0,255,150,.35);
-  border-radius:22px;
-  padding:26px;
-  backdrop-filter:blur(12px);
-  transition:.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+        .project{
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(0,255,150,.35);
+            border-radius:22px;
+            padding:26px;
+            backdrop-filter:blur(12px);
+            transition:.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-.project:hover{
-  transform:translateY(-6px);
-  box-shadow:0 0 40px rgba(0,255,150,.25);
-}
+        .project:hover{
+            transform:translateY(-6px);
+            box-shadow:0 0 40px rgba(0,255,150,.25);
+        }
 
-.project-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  margin-bottom:14px;
-}
+        .project-header{
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+            margin-bottom:14px;
+        }
 
-.project-title{
-  font-size:20px;
-  font-weight:600;
-  color:#eafff7;
-}
+        .project-title{
+            font-size:20px;
+            font-weight:600;
+            color:#eafff7;
+        }
 
-.project-badge{
-  font-size:10px;
-  padding:4px 8px;
-  border-radius:20px;
-  background:rgba(0,255,150,.15);
-  color:#00ff99;
-  white-space: nowrap;
-}
+        .project-badge{
+            font-size:10px;
+            padding:4px 8px;
+            border-radius:20px;
+            background:rgba(0,255,150,.15);
+            color:#00ff99;
+            white-space: nowrap;
+        }
 
-.project-tech{
-  font-size:13px;
-  color:#9fffe8;
-  margin-bottom:14px;
-}
+        .project-tech{
+            font-size:13px;
+            color:#9fffe8;
+            margin-bottom:14px;
+        }
 
-.project-desc{
-  font-size:14px;
-  line-height:1.6;
-  color:#c9fff0;
-  margin-bottom:20px;
-}
+        .project-desc{
+            font-size:14px;
+            line-height:1.6;
+            color:#c9fff0;
+            margin-bottom:20px;
+        }
 
-.project-link{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  color:#00ff99;
-  text-decoration:none;
-  font-size:14px;
-  font-weight: bold;
-}
+        .project-link{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            color:#00ff99;
+            text-decoration:none;
+            font-size:14px;
+            font-weight: bold;
+        }
 
-/* MOBILE OPTIMIZATION */
-@media (max-width: 768px) {
-  nav { padding: 15px 5%; }
-  
-  .menu-icon { display: flex; }
-  
-  .nav-links {
-    position: fixed;
-    top: 60px;
-    right: -100%;
-    width: 100%;
-    height: calc(100vh - 60px);
-    background: rgba(0,0,0,0.95);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: 0.4s;
-    display: flex;
-  }
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 768px) {
+            nav { padding: 15px 5%; }
+            
+            .menu-icon { display: flex; }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0,0,0,0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                display: flex;
+            }
 
-  .nav-links.active { right: 0; }
+            .nav-links.active { right: 0; }
 
-  .nav-links a {
-    margin: 20px 0;
-    font-size: 20px;
-  }
+            .nav-links a {
+                margin: 20px 0;
+                font-size: 24px;
+                margin-left: 0;
+            }
 
-  .hero h1 { font-size: 36px; }
-  
-  /* Loyihalarni 1 qatorda 2ta qilish */
-  .projects {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
+            .hero h1 { font-size: 36px; }
+            
+            /* LOYIHALAR: BITTA QATORDA BITTA */
+            .projects {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
 
-  .project {
-    padding: 15px;
-  }
+            .project {
+                padding: 22px;
+            }
 
-  .project-title { font-size: 14px; }
-  .project-badge { display: none; } /* Joy tejash uchun */
-  .project-desc { font-size: 11px; margin-bottom: 10px; }
-  .project-tech { font-size: 10px; }
-  .project-link { font-size: 11px; }
+            .about {
+                grid-template-columns: 1fr;
+            }
 
-  .stats { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 480px) {
-  /* Juda kichik ekranlar uchun shriftlarni moslash */
-  .hero h1 { font-size: 28px; }
-}
-
-</style>
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="hacker-bg">
-  <div class="code-layer"></div>
-  <div class="scanline"></div>
-</div>
-
-<nav>
-  <div class="logo">Abduvosit.dev</div>
-  
-  <div class="menu-icon" id="menuToggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-  <div class="nav-links" id="navLinks">
-    <a href="#about">Men haqimda</a>
-    <a href="#skills">Ko‘nikmalar</a>
-    <a href="#projects">Loyihalar</a>
-  </div>
-</nav>
-
-<div class="hero">
-  <h1>Salom, men <span>Abduvosit</span></h1>
-  <p> Android Dasturchi</p>
-  <code>&gt; ∞_</code>
-<div class="buttons">
-  <a href="#projects">Loyihalarim</a>
-  <a href="https://github.com/abduvositin" target="_blank">GitHub</a>
-</div>
-</div>
-
-<div class="stats">
-  <div class="stat"><h2>∞+</h2><p>Loyihalar</p></div>
-  <div class="stat"><h2>∞+</h2><p>Texnologiyalar</p></div>
-  <div class="stat"><h2>1+</h2><p>Yil tajriba</p></div>
-</div>
-
-<section id="about">
-<h2>Kim men?</h2>
-<div class="about">
-<p>
-  Men Abduvosit, 19 yoshli Android va Telegram bot dasturchiman.
-  Kotlin asosida Android ilovalar, PHP yordamida esa funksional va tezkor botlar yarataman.
-</p></div>
-</section>
-
-<section id="skills">
-<h2>Ko‘nikmalar</h2>
-<div class="skill">Kotlin<div class="bar"><span style="width:85%"></span></div></div>
-<div class="skill">PHP<div class="bar"><span style="width:75%"></span></div></div>
-<div class="skill">Python<div class="bar"><span style="width:35%"></span></div></div>
-<div class="skill">MySQL<div class="bar"><span style="width:80%"></span></div></div>
-<div class="skill">Firebase<div class="bar"><span style="width:75%"></span></div></div>
-</section>
-
-<section id="projects">
-<h2>Loyihalar</h2>
-
-<div class="projects">
-
-  <div class="project">
-    <div class="project-header">
-      <div class="project-title">Film Ichida</div>
-      <div class="project-badge">PHP</div>
+    <div class="hacker-bg">
+        <div class="code-layer"></div>
+        <div class="scanline"></div>
     </div>
-    <div class="project-tech">Telegram Bot</div>
-    <div class="project-desc">Kinolarni sifatli formatda tomosha qilish bot.</div>
-    <a href="https://t.me/FilmIchidaBot" target="_blank" class="project-link">Ochish →</a>
-  </div>
 
-  <div class="project">
-    <div class="project-header">
-      <div class="project-title">Flux Save</div>
-      <div class="project-badge">API</div>
+    <nav>
+        <div class="logo">Abduvosit.dev</div>
+        
+        <div class="menu-icon" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#about">Men haqimda</a>
+            <a href="#skills">Ko‘nikmalar</a>
+            <a href="#projects">Loyihalar</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Salom, men <span>Abduvosit</span></h1>
+        <p>Android Dasturchi</p>
+        <code>&gt; ∞_</code>
+        <div class="buttons">
+            <a href="#projects">Loyihalarim</a>
+            <a href="https://github.com/abduvositin" target="_blank">GitHub</a>
+        </div>
     </div>
-    <div class="project-tech">Video Downloader</div>
-    <div class="project-desc">Insta, FB, YT videolarini yuklovchi bot.</div>
-    <a href="https://t.me/FluxSaveBot" target="_blank" class="project-link">Ochish →</a>
-  </div>
 
-  <div class="project">
-    <div class="project-header">
-      <div class="project-title">Uni Signal</div>
-      <div class="project-badge">Kotlin</div>
+    <div class="stats">
+        <div class="stat"><h2>∞+</h2><p>Loyihalar</p></div>
+        <div class="stat"><h2>∞+</h2><p>Texnologiyalar</p></div>
+        <div class="stat"><h2>1+</h2><p>Yil tajriba</p></div>
     </div>
-    <div class="project-tech">App & News</div>
-    <div class="project-desc">Tezkor bildirishnomalar va yangiliklar ilovasi.</div>
-    <a href="https://github.com/abduvositin/UniGift-Signals/" target="_blank" class="project-link">Ochish →</a>
-  </div>
 
-</div>
-</section>
+    <section id="about">
+        <h2>Kim men?</h2>
+        <div class="about">
+            <p>
+                Men Abduvosit, 19 yoshli Android va Telegram bot dasturchiman.
+                Kotlin asosida Android ilovalar, PHP yordamida esa funksional va tezkor botlar yarataman.
+            </p>
+        </div>
+    </section>
 
-<script>
-  // Burger menyu ishlashi uchun
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
-  const links = document.querySelectorAll('.nav-links a');
+    <section id="skills">
+        <h2>Ko‘nikmalar</h2>
+        <div class="skill">Kotlin<div class="bar"><span style="width:85%"></span></div></div>
+        <div class="skill">PHP<div class="bar"><span style="width:75%"></span></div></div>
+        <div class="skill">MySQL<div class="bar"><span style="width:80%"></span></div></div>
+        <div class="skill">Firebase<div class="bar"><span style="width:75%"></span></div></div>
+    </section>
 
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
+    <section id="projects">
+        <h2>Loyihalar</h2>
+        <div class="projects">
 
-  // Link bosilganda menyu yopilishi
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-    });
-  });
-</script>
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">Film Ichida</div>
+                    <div class="project-badge">PHP</div>
+                </div>
+                <div class="project-tech">Telegram Bot</div>
+                <div class="project-desc">Kinolarni sifatli formatda tomosha qilish bot.</div>
+                <a href="https://t.me/FilmIchidaBot" target="_blank" class="project-link">Ochish →</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">Flux Save</div>
+                    <div class="project-badge">API</div>
+                </div>
+                <div class="project-tech">Video Downloader</div>
+                <div class="project-desc">Insta, FB, YT videolarini yuklovchi bot.</div>
+                <a href="https://t.me/FluxSaveBot" target="_blank" class="project-link">Ochish →</a>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">Uni Signal</div>
+                    <div class="project-badge">Kotlin</div>
+                </div>
+                <div class="project-tech">App & News</div>
+                <div class="project-desc">Tezkor bildirishnomalar va yangiliklar ilovasi.</div>
+                <a href="https://github.com/abduvositin/UniGift-Signals/" target="_blank" class="project-link">Ochish →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const links = document.querySelectorAll('.nav-links a');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Menu ochilganda burger ikonasini o'zgartirish (ixtiyoriy)
+            const spans = menuToggle.querySelectorAll('span');
+            menuToggle.classList.toggle('open');
+        });
+
+        // Link bosilganda menyuni yopish
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 
 </body>
 </html>
