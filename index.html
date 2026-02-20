@@ -5,549 +5,320 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abduvosit | Portfolio</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        :root {
+            --primary: #00ffa3;
+            --primary-glow: rgba(0, 255, 163, 0.4);
+            --bg-dark: #050a10;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+        }
+
         * { margin:0; padding:0; box-sizing:border-box; scroll-behavior: smooth; }
 
         body {
-            font-family: 'JetBrains Mono', monospace;
-            color: #e5fef5;
-            background: #000;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background: var(--bg-dark);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* --- HACKER BACKGROUND --- */
-        .hacker-bg {
+        /* --- BACKGROUND --- */
+        .bg-wrapper {
             position: fixed; inset: 0; z-index: -1;
-            background: radial-gradient(circle at top, #020617, #000);
+            background: radial-gradient(circle at 50% 50%, #0a192f 0%, #050a10 100%);
         }
-        .code-layer {
-            position: absolute; inset: 0;
-            background-image:
-                repeating-linear-gradient(0deg, rgba(0,255,150,.03) 0 1px, transparent 1px 3px),
-                repeating-linear-gradient(90deg, rgba(0,255,150,.03) 0 1px, transparent 1px 4px);
-            animation: move 25s linear infinite;
+        
+        .blob {
+            position: absolute;
+            width: clamp(300px, 50vw, 600px);
+            height: clamp(300px, 50vw, 600px);
+            background: radial-gradient(circle, rgba(0, 255, 163, 0.08) 0%, transparent 70%);
+            filter: blur(60px);
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
         }
-        @keyframes move { to { background-position: 0 600px; } }
 
-        .scanline {
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0,255,150,.1), transparent);
-            animation: scan 8s linear infinite;
-            pointer-events: none;
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(20%, 20%); }
         }
-        @keyframes scan { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
 
-        /* --- NAV --- */
+        /* --- NAVIGATION --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 10%;
-            background: rgba(0,0,0,.7);
-            backdrop-filter: blur(12px);
-            position: sticky; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(0, 255, 150, 0.1);
+            padding: 15px 8%;
+            background: rgba(5, 10, 16, 0.85);
+            backdrop-filter: blur(20px);
+            position: fixed; top: 0; width: 100%; z-index: 2000;
+            border-bottom: 1px solid var(--border);
         }
-        .logo { color: #00ff99; font-weight: 700; font-size: 22px; letter-spacing: -1px; }
+        
+        .logo { 
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800; font-size: 20px; color: var(--primary);
+            text-decoration: none; z-index: 2001;
+        }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
+        .nav-links { display: flex; align-items: center; }
 
         .nav-links a {
-            color: #e5fef5; text-decoration: none; margin-left: 25px;
-            font-size: 14px; transition: 0.3s;
+            color: var(--text-main); text-decoration: none; margin-left: clamp(15px, 3vw, 35px);
+            font-size: 14px; font-weight: 500; transition: 0.3s;
+            opacity: 0.8;
         }
-        .nav-links a:hover, .nav-links a.active { color: #00ff99; text-shadow: 0 0 10px rgba(0,255,150,0.5); }
+        
+        .nav-links a:hover { opacity: 1; color: var(--primary); }
 
-        /* --- BURGER MENU --- */
-        .menu-icon {
-            display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001;
-        }
-        .menu-icon span {
-            width: 30px; height: 3px; background-color: #00ff99;
-            transition: 0.4s; border-radius: 2px;
-        }
-
-        /* Burger Animation */
-        .menu-icon.open span:nth-child(1) { transform: rotate(45deg) translate(8px, 6px); }
-        .menu-icon.open span:nth-child(2) { opacity: 0; }
-        .menu-icon.open span:nth-child(3) { transform: rotate(-45deg) translate(8px, -6px); }
+        /* Mobile Menu Toggle */
+        .menu-btn { display: none; color: var(--text-main); font-size: 24px; cursor: pointer; z-index: 2001; }
 
         /* --- HERO --- */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            text-align: center; padding: 0 10%; margin-top: -60px;
-        }
-        .hero h1 { font-size: 56px; margin-bottom: 10px; line-height: 1.1; }
-        .hero h1 span { color: #00ff99; text-shadow: 0 0 25px rgba(0,255,150,.4); }
-        .hero p { margin: 20px 0; color: #9fffe8; font-size: 18px; max-width: 600px; }
-
-        .code-box {
-            background: rgba(0,0,0,.6);
-            border: 1px solid rgba(0,255,150,.3);
-            padding: 10px 20px;
-            border-radius: 8px;
-            color: #00ff99;
-            box-shadow: 0 0 20px rgba(0,255,150,.15);
-            margin-bottom: 30px;
-            font-size: 14px;
+            text-align: center; padding: 100px 5% 40px;
         }
 
-        .buttons { display: flex; gap: 20px; }
+        .badge {
+            background: rgba(0, 255, 163, 0.1);
+            color: var(--primary);
+            padding: 8px 16px; border-radius: 100px;
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 1.5px; margin-bottom: 25px;
+            border: 1px solid rgba(0, 255, 163, 0.2);
+            text-transform: uppercase;
+        }
+
+        .hero h1 { 
+            font-size: clamp(38px, 9vw, 84px); 
+            font-weight: 800; line-height: 1.1; margin-bottom: 25px;
+            background: linear-gradient(to bottom, #fff 50%, #94a3b8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span { color: var(--primary); -webkit-text-fill-color: var(--primary); text-shadow: 0 0 30px var(--primary-glow); }
+
+        .hero p { 
+            max-width: 650px; color: var(--text-dim); font-size: clamp(16px, 4vw, 19px); margin-bottom: 45px; 
+        }
+
         .btn {
-            padding: 12px 30px; border-radius: 30px;
-            border: 1px solid #00ff99; color: #00ff99;
-            text-decoration: none; transition: .3s; font-weight: 600;
-        }
-        .btn:hover { background: #00ff99; color: #000; box-shadow: 0 0 25px rgba(0,255,150,0.6); }
-        .btn-outline { background: transparent; }
-        .btn-fill { background: rgba(0,255,150,0.1); }
-
-        /* --- STATS --- */
-        .stats {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 25px; padding: 60px 10%;
-        }
-        .stat {
-            border: 1px solid rgba(0,255,150,.2);
-            padding: 25px; border-radius: 16px;
-            text-align: center; background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(5px);
-        }
-        .stat h2 { font-size: 36px; color: #00ff99; margin-bottom: 5px; }
-        .stat p { color: #8899a6; font-size: 14px; }
-
-        /* --- SECTIONS --- */
-        section { padding: 80px 10%; }
-        .section-title {
-            font-size: 32px; margin-bottom: 50px; color: #e5fef5;
-            display: flex; align-items: center; gap: 15px;
-        }
-        .section-title::before { content: '#'; color: #00ff99; }
-
-        /* --- ABOUT --- */
-        .about-content {
-            font-size: 16px; line-height: 1.8; color: #c9fff0;
-            background: rgba(0,255,150,0.05); padding: 30px;
-            border-radius: 15px; border-left: 4px solid #00ff99;
+            padding: 18px 38px; border-radius: 14px;
+            text-decoration: none; font-weight: 700; font-size: 15px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex; align-items: center; gap: 10px;
         }
 
-        /* --- SKILLS --- */
-        .skill-wrapper { display: flex; flex-direction: column; gap: 20px; }
-        .skill { margin-bottom: 5px; }
-        .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .bar-bg {
-            width: 100%; height: 8px; background: rgba(255,255,255,0.1);
-            border-radius: 10px; overflow: hidden;
+        .btn-primary {
+            background: var(--primary); color: #000;
+            box-shadow: 0 15px 35px -10px rgba(0, 255, 163, 0.4);
         }
-        .bar-fill {
-            height: 100%; background: #00ff99;
-            border-radius: 10px; position: relative;
-            box-shadow: 0 0 10px #00ff99;
-        }
+        .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 45px -10px rgba(0, 255, 163, 0.5); }
 
         /* --- PROJECTS --- */
+        section { padding: 80px 8%; }
+        .section-title { font-size: clamp(26px, 5vw, 36px); margin-bottom: 50px; font-weight: 800; display: flex; align-items: center; gap: 15px; }
+        .section-title::before { content: ""; width: 40px; height: 2px; background: var(--primary); }
+
         .projects-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
+
         .project-card {
-            background: rgba(10, 20, 30, 0.6);
-            border: 1px solid rgba(0,255,150,.2);
-            border-radius: 20px; padding: 30px;
-            transition: .4s; position: relative; overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 28px; padding: 35px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative; overflow: hidden;
             display: flex; flex-direction: column;
         }
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: #00ff99;
-            box-shadow: 0 10px 40px -10px rgba(0,255,150,.15);
-        }
-        .p-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
-        .p-title { font-size: 22px; font-weight: 700; color: #fff; }
-        .p-badge {
-            font-size: 11px; padding: 5px 10px; border-radius: 20px;
-            background: rgba(0,255,150,.1); color: #00ff99; border: 1px solid rgba(0,255,150,.3);
-        }
-        .p-desc { font-size: 14px; color: #a0aec0; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
-        .p-link {
-            color: #00ff99; text-decoration: none; font-weight: 600; font-size: 14px;
-            display: inline-flex; align-items: center; gap: 8px;
-        }
-        .p-link:hover { text-decoration: underline; }
 
-        /* --- CONTACT (ALOQA) --- */
-        .contact-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        .project-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-12px);
+            background: rgba(0, 255, 163, 0.03);
+            box-shadow: 0 20px 50px -20px rgba(0,0,0,0.5);
+        }
+
+        .p-icon { font-size: 38px; color: var(--primary); margin-bottom: 25px; opacity: 0.9; }
+        .p-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+        .p-desc { color: var(--text-dim); font-size: 15px; margin-bottom: 30px; flex-grow: 1; }
+        
+        .p-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px; font-weight: 700; color: var(--primary);
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+        }
+        .p-link:hover { gap: 15px; }
+
+        /* --- CONTACT --- */
+        .contact-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 20px;
         }
-        .contact-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(0,255,150,0.2);
-            padding: 30px; border-radius: 15px;
-            text-align: center; transition: 0.3s;
-            text-decoration: none;
-            display: flex; flex-direction: column; align-items: center; gap: 15px;
-        }
-        .contact-box:hover {
-            background: rgba(0,255,150,0.1);
-            border-color: #00ff99;
-            transform: scale(1.02);
-        }
-        .contact-icon { font-size: 40px; color: #00ff99; margin-bottom: 10px; }
-        .contact-text h3 { color: #fff; font-size: 18px; margin-bottom: 5px; }
-        .contact-text span { color: #8899a6; font-size: 14px; }
 
-        /* --- FOOTER --- */
-        footer {
-            text-align: center; padding: 40px;
-            border-top: 1px solid rgba(0,255,150,0.1);
-            color: #556677; font-size: 13px;
+        .contact-item {
+            padding: 25px; background: var(--card-bg);
+            border-radius: 20px; border: 1px solid var(--border);
+            text-align: center; text-decoration: none; color: inherit;
+            transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 12px;
         }
 
-        /* =========================
-           BETTER MOBILE EXPERIENCE
-        ========================= */
-
-        a, button {
-            -webkit-tap-highlight-color: transparent;
+        .contact-item:hover {
+            border-color: var(--primary);
+            background: rgba(0, 255, 163, 0.06);
+            transform: translateY(-5px);
         }
 
-        h1, h2, p, span, a {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
+        .contact-item i { font-size: 28px; color: var(--primary); }
+        .contact-item span { font-size: 14px; font-weight: 600; }
 
-        .nav-links, .project-card, .contact-box {
-            will-change: transform;
-        }
-
-        /* --- MOBILE RESPONSIVE --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            nav { padding: 14px 18px; }
-            .logo { font-size: 18px; }
-
-            .menu-icon { display: flex; }
-
-            /* MENU FULLSCREEN + ANIMATION */
+            .menu-btn { display: block; }
+            
             .nav-links {
-                position: fixed;
-                inset: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(2, 6, 23, 0.98);
-                backdrop-filter: blur(18px);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transform: translateX(100%);
-                opacity: 0;
-                transition: .45s cubic-bezier(0.4, 0, 0.2, 1);
-                gap: 8px;
-                z-index: 1000;
+                position: fixed; top: 0; right: -100%; height: 100vh; width: 80%;
+                background: #0a1118; flex-direction: column; justify-content: center;
+                transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                border-left: 1px solid var(--border);
+                box-shadow: -20px 0 50px rgba(0,0,0,0.5);
             }
 
-            .nav-links.active {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            .nav-links.active { right: 0; }
+            .nav-links a { margin: 20px 0; font-size: 18px; }
 
-            .nav-links a {
-                margin: 10px 0;
-                font-size: 22px;
-                font-weight: 700;
-                padding: 12px 22px;
-                border-radius: 14px;
-                width: min(320px, 85%);
-                text-align: center;
-                border: 1px solid rgba(0, 255, 150, 0.12);
-                background: rgba(0, 255, 150, 0.06);
-            }
-
-            .nav-links a:active {
-                transform: scale(0.98);
-            }
-
-            .hero {
-                padding: 0 18px;
-                margin-top: -30px;
-            }
-
-            .hero h1 {
-                font-size: 34px;
-                line-height: 1.2;
-            }
-
-            .hero p {
-                font-size: 14px;
-                line-height: 1.6;
-                margin: 16px 0 22px;
-            }
-
-            .code-box {
-                font-size: 13px;
-                padding: 10px 16px;
-                width: fit-content;
-                max-width: 100%;
-                overflow-x: auto;
-            }
-
-            .buttons {
-                flex-direction: column;
-                width: 100%;
-                gap: 12px;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-                padding: 14px 18px;
-                font-size: 15px;
-            }
-
-            .stats {
-                padding: 35px 18px;
-                gap: 14px;
-            }
-
-            .stat {
-                padding: 18px;
-                border-radius: 18px;
-            }
-
-            .stat h2 {
-                font-size: 28px;
-            }
-
-            section { padding: 55px 18px; }
-
-            .section-title {
-                font-size: 24px;
-                margin-bottom: 30px;
-            }
-
+            section { padding: 60px 6%; }
             .projects-grid { grid-template-columns: 1fr; }
-
-            .project-card {
-                padding: 22px;
-                border-radius: 20px;
-            }
-
-            .p-title { font-size: 18px; }
-            .p-desc { font-size: 13px; }
-
-            .p-link {
-                font-size: 14px;
-                padding: 10px 14px;
-                border-radius: 14px;
-                border: 1px solid rgba(0,255,150,0.14);
-                background: rgba(0,255,150,0.06);
-                justify-content: center;
-            }
-
-            .contact-container { grid-template-columns: 1fr; }
-
-            .contact-box {
-                padding: 22px;
-                border-radius: 18px;
-            }
-
-            .contact-icon { font-size: 34px; }
-
-            footer {
-                padding: 28px 18px;
-                font-size: 12px;
-            }
+            .hero { padding-top: 60px; }
         }
 
-        @media (max-width: 380px) {
-            .hero h1 { font-size: 30px; }
-            .nav-links a { font-size: 20px; }
-        }
     </style>
 </head>
-
 <body>
 
-    <div class="hacker-bg">
-        <div class="code-layer"></div>
-        <div class="scanline"></div>
-    </div>
+    <div class="bg-wrapper"><div class="blob"></div></div>
 
     <nav>
-        <div class="logo">Abduvosit.dev</div>
-
-        <div class="menu-icon" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="nav-links" id="navLinks">
-            <a href="#about">Men haqimda</a>
-            <a href="#skills">Ko‘nikmalar</a>
+        <a href="#" class="logo">ABDUVOSIT<span>.</span>DEV</a>
+        <div class="menu-btn" id="menuOpen"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="navMenu">
             <a href="#projects">Loyihalar</a>
-            <a href="#contact">Aloqa</a>
+            <a href="https://github.com/abduvositin" target="_blank">GitHub</a>
+            <a href="#contact">Bog'lanish</a>
         </div>
     </nav>
 
     <div class="hero">
-        <h1>Salom, men <br> <span>Abduvosit</span></h1>
-        <p>Android Dasturchi & Telegram Bot yaratuvchisi. <br> Kelajakni kodlar orqali quraman.</p>
-        <div class="code-box">&gt; print("Portfolio");</div>
-
-        <div class="buttons">
-            <a href="#projects" class="btn btn-fill">Loyihalarim</a>
-            <a href="#contact" class="btn btn-outline">Bog'lanish</a>
+        <div class="badge" data-aos="fade-down">Available for Freelance</div>
+        <h1 data-aos="fade-up">Salom, Men <br> <span>Abduvosit</span></h1>
+        <p data-aos="fade-up" data-aos-delay="100">
+            Android ekotizimi va Telegram botlar olamida raqamli tajribalar yaratuvchi injenerman. 
+            Kotlin va PHP orqali biznesingizni avtomatlashtirishga yordam beraman.
+        </p>
+        <div data-aos="fade-up" data-aos-delay="200">
+            <a href="#projects" class="btn btn-primary">
+                Loyihalarni ko'rish <i class="fas fa-arrow-right"></i>
+            </a>
         </div>
     </div>
-
-    <div class="stats">
-        <div class="stat"><h2>∞</h2><p>Loyihalar</p></div>
-        <div class="stat"><h2>∞</h2><p>Asosiy Stack</p></div>
-        <div class="stat"><h2>∞+</h2><p>Yil tajriba</p></div>
-    </div>
-
-    <section id="about">
-        <h2 class="section-title">Kim men?</h2>
-        <div class="about-content">
-            Men Abduvosit, 19 yoshli Android va Telegram bot dasturchiman.
-            Mening maqsadim – odamlar uchun qulay va foydali raqamli yechimlar yaratish.
-            Kotlin tilida mobil ilovalar, PHP yordamida esa murakkab mantiqqa ega botlar yozaman.
-        </div>
-    </section>
-
-    <section id="skills">
-        <h2 class="section-title">Ko‘nikmalar</h2>
-        <div class="skill-wrapper">
-            <div class="skill">
-                <div class="skill-info"><span>Kotlin</span><span>90%</span></div>
-                <div class="bar-bg"><div class="bar-fill" style="width:90%"></div></div>
-            </div>
-            <div class="skill">
-                <div class="skill-info"><span>PHP</span><span>80%</span></div>
-                <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
-            </div>
-            <div class="skill">
-                <div class="skill-info"><span>MySQL</span><span>75%</span></div>
-                <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
-            </div>
-            <div class="skill">
-                <div class="skill-info"><span>FCM</span><span>55%</span></div>
-                <div class="bar-bg"><div class="bar-fill" style="width:55%"></div></div>
-            </div>
-        </div>
-    </section>
 
     <section id="projects">
-        <h2 class="section-title">Loyihalar</h2>
+        <h2 class="section-title" data-aos="fade-right">Tanlangan Ishlar</h2>
         <div class="projects-grid">
-
-            <div class="project-card">
-                <div class="p-header">
-                    <div class="p-title">Film Ichida</div>
-                    <div class="p-badge">PHP</div>
-                </div>
-                <div class="p-desc">
-                    Telegram platformasi uchun kinolarni avtomatik topish va sifatli formatda tomosha qilish imkonini beruvchi bot.
-                </div>
-                <a href="https://t.me/FilmIchidaBot" target="_blank" class="p-link">
-                    <i class="fab fa-telegram-plane"></i> Botga o'tish
-                </a>
+            
+            <div class="project-card" data-aos="fade-up">
+                <div class="p-icon"><i class="fab fa-telegram"></i></div>
+                <h3 class="p-title">Film Ichida</h3>
+                <p class="p-desc">Kinolarni avtomatik qidirish va yuqori sifatda taqdim etuvchi murakkab bot. PHP va MySQL bazasida ishlaydi.</p>
+                <a href="https://t.me/FilmIchidaBot" target="_blank" class="p-link">BOTNI OCHISH <i class="fas fa-external-link-alt"></i></a>
             </div>
 
-            <div class="project-card">
-                <div class="p-header">
-                    <div class="p-title">Flux Save</div>
-                    <div class="p-badge">API</div>
-                </div>
-                <div class="p-desc">
-                    Instagram, TikTok, YouTube va Facebook videolarini suv belgisiz (watermark) yuklab beruvchi universal bot.
-                </div>
-                <a href="https://t.me/FluxSaveBot" target="_blank" class="p-link">
-                    <i class="fab fa-telegram-plane"></i> Botga o'tish
-                </a>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-icon"><i class="fab fa-telegram"></i></div>
+                <h3 class="p-title">Flux Save</h3>
+                <p class="p-desc">TikTok, Instagram va YouTube-dan videolarni suv belgisiz yuklovchi tezkor servis. API integratsiyasi bilan yozilgan.</p>
+                <a href="https://t.me/FluxSaveBot" target="_blank" class="p-link">BOTNI OCHISH <i class="fas fa-external-link-alt"></i></a>
             </div>
 
-            <div class="project-card">
-                <div class="p-header">
-                    <div class="p-title">Uni Signal</div>
-                    <div class="p-badge">Kotlin</div>
-                </div>
-                <div class="p-desc">
-                    Android uchun maxsus ilova. Foydalanuvchilarga muhim signallar va yangiliklarni tezkor yetkazib beradi.
-                </div>
-                <a href="https://github.com/abduvositin/UniGift-Signals/" target="_blank" class="p-link">
-                    <i class="fab fa-github"></i> Kodni ko'rish
-                </a>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-icon"><i class="fas fa-layer-group"></i></div>
+                <h3 class="p-title">Uni Signal</h3>
+                <p class="p-desc">Android foydalanuvchilari uchun foydali signallarni yetkazuvchi ilova. Kotlin va Firebase texnologiyalari qo'llanilgan.</p>
+                <a href="https://github.com/abduvositin" target="_blank" class="p-link">KODNI KO'RISH <i class="fab fa-github"></i></a>
             </div>
 
         </div>
     </section>
 
     <section id="contact">
-        <h2 class="section-title">Aloqa</h2>
-        <div class="contact-container">
-
-            <a href="https://t.me/abduvositin" target="_blank" class="contact-box">
-                <i class="fab fa-telegram contact-icon"></i>
-                <div class="contact-text">
-                    <h3>Telegram</h3>
-                    <span>Menga yozing</span>
-                </div>
+        <h2 class="section-title" data-aos="fade-right">Bog'lanish</h2>
+        <div class="contact-grid">
+            <a href="https://t.me/abduvositin" target="_blank" class="contact-item" data-aos="zoom-in">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram</span>
             </a>
-
-            <a href="https://instagram.com/abduvositin" target="_blank" class="contact-box">
-                <i class="fab fa-instagram contact-icon"></i>
-                <div class="contact-text">
-                    <h3>Instagram</h3>
-                    <span>Kuzatib boring</span>
-                </div>
+            <a href="https://github.com/abduvositin" target="_blank" class="contact-item" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
             </a>
-
-            <a href="https://github.com/abduvositin" target="_blank" class="contact-box">
-                <i class="fab fa-github contact-icon"></i>
-                <div class="contact-text">
-                    <h3>GitHub</h3>
-                    <span>Loyihalarim</span>
-                </div>
+            <a href="https://instagram.com/abduvositin" target="_blank" class="contact-item" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
             </a>
-
+            <a href="mailto:abduvosit@example.com" class="contact-item" data-aos="zoom-in" data-aos-delay="300">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+            </a>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Abduvosit. Barcha huquqlar himoyalangan.</p>
+    <footer style="padding: 60px 8% 30px; text-align: center; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-dim);">
+        <p>&copy; 2026 Abduvosit Portfolio. Barcha huquqlar himoyalangan.</p>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        const links = document.querySelectorAll('.nav-links a');
+        // Initialize Animations
+        AOS.init({ duration: 1000, once: true, offset: 100 });
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('open');
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menuOpen');
+        const navMenu = document.getElementById('navMenu');
 
-            // ✅ scroll lock
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
 
-        // Link bosilganda menyuni yopish
-        links.forEach(link => {
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('open');
+                navMenu.classList.remove('active');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
 
-                // ✅ scroll unlock
-                document.body.style.overflow = '';
+        // Spotlight Effect
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--y', `${e.clientY - rect.top}px`);
             });
         });
     </script>
-
 </body>
 </html>
